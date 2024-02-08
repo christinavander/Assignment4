@@ -8,25 +8,8 @@ public class LinkedListTest {
     public static void main(String args[]){
         LinkedList<String> list = new LinkedList<>();
 
-        /*list.addAtBeginning("A");
-        list.addAtEnd("H");
-        list.addAtEnd("I");
-        list.addAtEnd("T");
-        list.addAtEnd("S");
-        list.addAtEnd("R");
-        list.addAtEnd("S");
-        list.addAtEnd("V");
 
-        list.printList();
-        System.out.println();
-        //list.mergeSort(list);
-
-        LinkedList<String> sortedList = new LinkedList<>();
-        sortedList = list.mergeSort(list);
-        sortedList.printList();*/
-
-        //MERGELIST is new list
-        /*list.addAtEnd("M");
+        list.addAtEnd("M");
         list.addAtEnd("E");
         list.addAtEnd("R");
         list.addAtEnd("G");
@@ -41,7 +24,8 @@ public class LinkedListTest {
 
         LinkedList<String> sortedList = new LinkedList<>();
         sortedList = list.mergeSort(list);
-        sortedList.printList();*/
+        System.out.print("List after sorting:\n");
+        sortedList.printList();
 
 
 

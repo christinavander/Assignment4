@@ -38,10 +38,6 @@ public class LinkedList<Item> {
         }
 
 
-        public Iterator<Item> iterator() {
-            return new DoublyLinkedListIterator();
-        }
-
         @Override
         public int compare(Item item1, Item item2) {
             String firstItem = (String)item1;
@@ -54,26 +50,6 @@ public class LinkedList<Item> {
 
         }
 
-
-
-        private class DoublyLinkedListIterator implements Iterator<Item>{
-            private DoubleNode first = head;
-
-            public boolean hasNext(){
-                return first!= null;
-            }
-
-            public Item next(){
-                Item item = first.item;
-                first = first.next;
-                return item;
-            }
-
-            public void remove(){
-
-
-            }
-        }
 
         private DoubleNode getTail(){
             return tail;
@@ -99,9 +75,7 @@ public class LinkedList<Item> {
      *
      */
     private DoubleNode findSortedEnd(DoubleNode head){
-        //DoubleNode head = list.getHead();
         DoubleNode sortedEnd = new DoubleNode();
-        //int count = 0;
 
         for(DoubleNode current = head; current != null; current = current.next){
             if(current == current.getTail()){
@@ -118,7 +92,7 @@ public class LinkedList<Item> {
 
 
     /**
-     * MergeSort sorts a linked list based on naturally occurring sorted subarrays
+     * MergeSort sorts a linked list based on naturally occurring sorted sub arrays
      */
     public LinkedList mergeSort(LinkedList list){
 
@@ -126,32 +100,18 @@ public class LinkedList<Item> {
         DoubleNode start = list.getHead();
         ptr1 = findSortedEnd(start);
 
-        System.out.println("ptr1 is the sortedEnd of list is: " + ptr1.item); //Yes this works
-
         DoubleNode ptr2 = new DoubleNode();
         ptr2 = ptr1.next; //List without first sorted sub array
 
-        System.out.println("ptr2 is the rest of the list after the end: " + ptr2.item);//Yes this works
-
         DoubleNode cont = new DoubleNode();
 
-
-        //System.out.println(ptr2.item);
-        //System.out.println(ptr2.next.item);
-        System.out.println("Ptr2 item (beginning of next sorted subarray): " + ptr2.item);
-
-
         cont = findSortedEnd(ptr2); //Second sorted subarray end
-
-        System.out.println("cont is the end of the next sorted subarray: " + cont.item);
-        System.out.println("cont.next is:" + cont.next);
 
         LinkedList finalHead = new LinkedList<>();
         finalHead = merge(start, ptr1, ptr2, cont);
 
 
         if(cont.next == null){
-            System.out.println("We have reached the end of the linked list to sort, return the final head");
             return finalHead;
         }
         else{
@@ -162,53 +122,28 @@ public class LinkedList<Item> {
             }
             return mergeSort(finalHead);
        }
-
-        //if(cont.next != null){
-            //mergeSort(finalHead);
-        //}
-
-        //return finalHead;
     }
 
     /**
      * Merge two heads of Nodes
      */
-    //TODO
     private LinkedList merge(DoubleNode head1Start, DoubleNode head1End, DoubleNode head2Start, DoubleNode head2End){
         LinkedList<Item> mergedList = new LinkedList<>();
 
         while(head1Start != head1End.next && head2Start != null && head2Start != head2End.next){
             if (head1Start.compare(head1Start.item, head2Start.item) < 0) { //If first item is smaller
-                //if(head1Start == head1End){
-                 //   mergedList.addAtEnd(head1Start.item);
-                    //break;
-                    //continue;
-                //}
-                //else //{
                     mergedList.addAtEnd(head1Start.item);
                     head1Start = head1Start.next;
-                //}
-
             }
             else if (head1Start.compare(head1Start.item, head2Start.item) == 0){ //If the items are equal, add both to the list
                 mergedList.addAtEnd(head1Start.item);
                 mergedList.addAtEnd(head2Start.item);
                 head1Start = head1Start.next;
                 head2Start = head2Start.next;
-                //if(head1Start == head1End || head2Start == head2End){
-                    //continue;
-                //}
             }
             else if (head1Start.compare(head1Start.item, head2Start.item) > 0){ //The second item is smaller
-                //if(head2Start== head2End){
-                    //mergedList.addAtEnd(head2Start.item);
-                   // break;
-                //}else {
                     mergedList.addAtEnd(head2Start.item);
                     head2Start = head2Start.next;
-                //}
-
-
             }
         }
 
